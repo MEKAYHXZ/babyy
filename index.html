@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Good Luck My Love</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+      overflow-y: auto;
+      text-align: center;
+    }
+
+    .container {
+      position: relative;
+      padding: 80px 20px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #ffc1e3;
+    }
+
+    .typewriter {
+      font-size: 18px;
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #ffc1e3;
+      animation: typing 5s steps(100, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      50% { border-color: transparent }
+    }
+
+    .photo {
+      margin: 30px auto;
+    }
+
+    .photo img {
+      border-radius: 20px;
+      max-width: 300px;
+      width: 90%;
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    #openLetterBtn {
+      background-color: #ff6b81;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    #openLetterBtn:hover {
+      background-color: #ff4b61;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 20px;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 0.5s;
+    }
+
+    .modal-content h2 {
+      color: #ff6b81;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Fireworks / Sparkle Effect */
+    .fireworks {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sparkle Effect Script -->
+<canvas class="fireworks"></canvas>
+
+<div class="container">
+  <h1>Good Luck My Love! 🍀</h1>
+
+  <div class="typewriter">
+    I'm always cheering for you! You’ve worked so hard and I know you’ll make it.<br>
+      This is your moment. I believe in you 1000%! You got this! 💪<br><br>
+      I love you! 💖
+    </div>
+
+  <div class="photo">
+    <img src="your-photo.png" alt="Our Photo">
+  </div>
+
+  <button id="openLetterBtn">Click here to read my letter 💌</button>
+</div>
+
+<!-- Modal -->
+<div id="loveLetterModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>To My Love 💖</h2>
+    <p>
+      I just want to say how incredibly proud I am of you. You’ve come so far and continue to amaze me
+       with your dedication and kind heart. No matter what, I’ll always be here — your #1 fan! 
+       Let's keep dreaming together. 💖💕
+    </p>
+  </div>
+</div>
+
+<script>
+  // Modal Script
+  const modal = document.getElementById("loveLetterModal");
+  const btn = document.getElementById("openLetterBtn");
+  const span = document.querySelector(".close");
+
+  btn.onclick = () => modal.style.display = "block";
+  span.onclick = () => modal.style.display = "none";
+  window.onclick = (event) => {
+    if (event.target === modal) modal.style.display = "none";
+  };
+</script>
+
+<!-- Fireworks Sparkle JS -->
+<script>
+  const canvas = document.querySelector('.fireworks');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const particles = [];
+  function createSparkle() {
+    for (let i = 0; i < 5; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        radius: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2,
+        alpha: 1,
+        color: `hsl(${Math.random() * 360}, 100%, 75%)`
+      });
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      p.alpha -= 0.01;
+      if (p.alpha <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(animate);
+  }
+
+  setInterval(createSparkle, 100);
+  animate();
+</script>
+
+</body>
+</html>
